@@ -14,9 +14,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'user.apps.UserConfig',
+    'base.apps.BaseConfig',
 ]
 
-INTERNAL_IPS = ('127.0.0.1')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,6 +65,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = "user.User"
 
 
 LANGUAGE_CODE = 'ko'
