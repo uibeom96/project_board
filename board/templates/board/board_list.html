@@ -4,6 +4,9 @@
 {% block title %} 게시판 리스트 {% endblock %}
 
 {% block content %}
+{% if request.GET %}
+<p class="alert alert-danger text-center">'{{ request.GET.search_input }}' 에 대한 검색결과 입니다.</p>
+{% endif %}
 <table class="table table-hover">
     <thead>
         <tr>
@@ -22,7 +25,7 @@
             <td>{{post.id}}</td>
             <td><a href="">{{post.title}}</a></td>
             <td>{{post.author}}</td>
-            <td>{{post.created}}</td>
+            <td>{{post.created|date:'Y-m-d H:i:s'}}</td>
             <td>{{post.hit_count}}</td>
             <td>{{post.like|length}}</td>
             <td>{{post.dis_like|length}}</td>
