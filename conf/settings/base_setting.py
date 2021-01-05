@@ -2,24 +2,8 @@ from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 import json
 
-BASE_DIR = Path(__file__).resolve().parent.parent
 
-with open("secret.json", "r", encoding="UTF-8") as file:
-    secret_key_list = json.loads(file.read())
-
-def get_secret(key, secret_key_list=secret_key_list):
-    try:
-        return secret_key_list[key]
-    except KeyError:
-        raise ImproperlyConfigured("{}오류".format(key))
-
-
-SECRET_KEY = get_secret("secret_DJANGO")
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 INSTALLED_APPS = [
@@ -62,16 +46,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'conf.wsgi.application'
 
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -86,7 +60,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 
 LANGUAGE_CODE = 'ko'
