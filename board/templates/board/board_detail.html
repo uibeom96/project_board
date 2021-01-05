@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %} 상세페이지 {% endblock %}
+
+{% block content %}
+<br>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+
+        <div class="card">
+            <div class="card-body">
+                <p class="text-center">{{post.title}}</p><hr>
+                <p>
+                    <h6 class="badge badge-secondary">작성자 : {{post.author}}</h6> 
+                    <h6 class="badge badge-secondary">작성일 : {{post.created|date:'Y-m-d H:i:s'}}</h6> 
+                    <h6 class="badge badge-secondary">조회수 : {{post.hit_count}}</h6>
+                </p>
+                {% if post.image %}
+                <p class="text-center"><img src="{{ post.image.url }}" width="80%"></p>
+                {% endif %}
+                <p class="text-center">{{ post.content }}</p>
+
+                <p class="text-center">
+                    <a class="btn btn-primary" href="">좋아요
+                        <span class="badge bg-secondary">{{post.like|length}}</span>
+                    </a> 
+                    <a class="btn btn-danger" href="">싫어요 
+                        <span class="badge bg-secondary">{{post.dis_like|length}}</span>
+                    </a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}

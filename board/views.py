@@ -1,12 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from board.models import Post
 from django.core.paginator import Paginator
 from datetime import timezone
 
 
-
-
-# Create your views here.
 def board_list(request):
         
     page = request.GET.get("page", 1)
@@ -22,5 +19,11 @@ def board_list(request):
             page_obj = page_count.get_page(page)
     
     return render(request, "board/board_list.html", {"post_list": page_obj})
+
+
+def board_detail(request, pk, slug):
+    post = get_object_or_404(Post, id=pk, slug=slug)
+    return render(request, "board/board_detail.html", {"post": post})
+    
 
 

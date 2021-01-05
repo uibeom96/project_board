@@ -23,7 +23,7 @@
         {% for post in post_list %}
         <tr>
             <td>{{post.id}}</td>
-            <td><a href="">{{post.title}}</a></td>
+            <td><a href="{{ post.get_absolute_url }}">{{post.title}}</a></td>
             <td>{{post.author}}</td>
             <td>{{post.created|date:'Y-m-d H:i:s'}}</td>
             <td>{{post.hit_count}}</td>
