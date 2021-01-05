@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'bootstrap4',
     'user.apps.UserConfig',
     'base.apps.BaseConfig',
     'board.apps.BoardConfig',

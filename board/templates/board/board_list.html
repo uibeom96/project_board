@@ -1,6 +1,36 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+
 {% block title %} 게시판 리스트 {% endblock %}
 
 {% block content %}
-<p class="alert alert-info"> 하이요 </p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>날짜</th>
+            <th>조회수</th>
+            <th>좋아요</th>
+            <th>싫어요</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in post_list %}
+        <tr>
+            <td>{{post.id}}</td>
+            <td><a href="">{{post.title}}</a></td>
+            <td>{{post.author}}</td>
+            <td>{{post.created}}</td>
+            <td>{{post.hit_count}}</td>
+            <td>{{post.like|length}}</td>
+            <td>{{post.dis_like|length}}</td>
+        </tr>
+    </tbody>
+        {% endfor %}
+</table>
+
+{% bootstrap_pagination post_list %}
+<a class="btn btn-info border" href="">글 쓰기</a>
 {% endblock %}
