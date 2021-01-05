@@ -11,7 +11,7 @@ class Base_model(models.Model):
     class Meta:
         abstract = True
 
-    def delete(self, using, Keep_parents=False):
+    def delete(self, using=None, Keep_parents=False):
         self.is_deleted = True
         self.deleted = datetime.now()
         self.save()

@@ -18,7 +18,7 @@
                     <h6 class="badge badge-secondary">조회수 : {{post.hit_count}}</h6>
                 </p>
                 {% if post.image %}
-                <p class="text-center"><img src="{{ post.image.url }}" width="80%"></p>
+                <p class="text-center"><img src="{{ post.image.url }}" width="70%"></p>
                 {% endif %}
                 <p class="text-center">{{ post.content }}</p>
 
@@ -31,7 +31,12 @@
                     </a>
                 </p>
 
+                {% if post.author == request.user %}
+                    <a class="btn btn-info" href="">수정</a>
+                    <a class="btn btn-warning" href="">삭제</a>
+                {% endif %}
             </div>
+            <hr><br><br>
         </div>
     </div>
     <div class="col-md-3"></div>
