@@ -32,8 +32,8 @@
                 </p>
 
                 {% if post.author == request.user %}
-                    <a class="btn btn-info" href="">수정</a>
-                    <a class="btn btn-warning" href="">삭제</a>
+                    <a class="btn btn-info" href="{% url 'board:board_update' post.pk post.slug %}">수정</a>
+                    <a class="btn btn-warning" href="{% url 'board:board_delete' post.pk post.slug %}">삭제</a>
                 {% endif %}
             </div>
             <hr><br><br>
