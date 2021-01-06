@@ -9,14 +9,22 @@
         </form>
     </div>
     
+    {% if user.is_authenticated %}
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="{% url 'accounts:signout' %}">로그아웃</a>
+      </li>
+    </ul>
+    {% else %}
     <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-dark" href="#">로그인</a>
+          <a class="nav-link text-dark" href="{% url 'accounts:signin' %}">로그인</a>
         </li>
         
         <li class="nav-item">
             <a class="nav-link text-dark" href="{% url 'accounts:signup' %}">회원가입</a>
           </li>
       </ul>
-
+    {% endif %}
+      
   </nav>

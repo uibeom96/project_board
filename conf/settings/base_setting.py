@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'bootstrap4',
+    'rest_framework',
     'user.apps.UserConfig',
     'base.apps.BaseConfig',
     'board.apps.BoardConfig',
@@ -51,6 +52,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'conf.wsgi.application'
 
 
@@ -71,6 +73,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "user.User"
 
+LOGOUT_REDIRECT_URL = "/"
 
 LANGUAGE_CODE = 'ko'
 
