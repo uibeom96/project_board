@@ -4,7 +4,10 @@ from django.core.paginator import Paginator
 from datetime import timezone
 from board.forms import PostCreate_Form
 
+
 def board_list(request):
+    
+
     page = request.GET.get("page", 1)
     post_list = Post.objects.filter(is_deleted=False, display_avilable=False).select_related("author")
     page_count = Paginator(post_list , 8)

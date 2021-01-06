@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'base.apps.BaseConfig',
     'board.apps.BoardConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 
@@ -81,6 +82,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+HIT_ID = 1
 
 
 STATIC_URL = '/static/'
