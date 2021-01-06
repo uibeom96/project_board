@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} 회원탈퇴 페이지 {% endblock %}
+
+{% block content %}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    회원탈퇴
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Warning ! </h5>
+          <button type="button" class="btn-close btn btn-warning btn-sm" data-bs-dismiss="modal" aria-label="Close">취소</button>
+        </div>
+        <div class="modal-body">
+          <p class="alert alert-danger">{{ user }}, 회원님 정말 회원탈퇴를 진행하실건가요?</p> 
+          <p class="alert alert-danger"> 탈퇴를 원하시는 경우엔 <strong>"탈퇴하기"</strong>를 입력해주세요</p>
+
+
+        </div>
+        <div class="modal-footer">
+          <form action="" method="POST">
+              {% csrf_token %}
+              <input type="text" name="delete_input">
+              <input class="btn btn-primary btn-sm" type="submit" value="확인"> 
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

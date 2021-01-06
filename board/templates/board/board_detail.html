@@ -23,12 +23,13 @@
                 <p class="text-center">{{ post.content }}</p>
 
                 <p class="text-center">
-                    <a class="btn btn-primary" href="">좋아요
+                    <button id="{{ post_id }}" onclick="click_post_like(this.id)" type="submit" class="btn btn-primary">좋아요 
+                        <span id="like_count" class="badge bg-secondary">{{post.like|length}}</span>
+                    </button>
+                        
+                    <button type="submit" class="btn btn-danger">싫어요 
                         <span class="badge bg-secondary">{{post.like|length}}</span>
-                    </a> 
-                    <a class="btn btn-danger" href="">싫어요 
-                        <span class="badge bg-secondary">{{post.dis_like|length}}</span>
-                    </a>
+                    </button>
                 </p>
 
                 {% if post.author == request.user %}
@@ -41,4 +42,24 @@
     </div>
     <div class="col-md-3"></div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script>
+    function click_post_like(id) {
+        console.log("hi")
+        $.ajax({
+            url: "{% url 'board:board_likes' %}",
+            data: {
+                'post_id': id
+            },
+            dataType: "json",
+            success: function (response) {
+                $('#like_count').html(response.like_count)
+                $('#message').html(response.message)
+                $('.toast').fadeIn(400).delay(100).fadeOut(400)
+            }
+        })
+    }
+</script>
 {% endblock %}

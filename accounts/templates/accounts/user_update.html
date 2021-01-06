@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %} 회원정보 수정 페이지 {% endblock %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {% load bootstrap4 %}
+    {% bootstrap_form form %}
+    <input class="btn btn-info" type="submit" value="수정하기">
+</form>
+{% endblock %}

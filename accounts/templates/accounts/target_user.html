@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %} 서치유저 페이지 {% endblock %}
+
+{% block content %}
+
+  
+<br><br><br><br>
+<div class="row">
+    
+    <div class="col-md-3"></div>
+    <div class="col-md-6 text-center">
+        <table>
+            <form class="d-flex" action="{% url 'accounts:target_user' %}" method="GET">
+                <input  name="search_user" placeholder="유저 닉네임 검색" value="{{ request.GET.user_search }}">
+                <input  type="submit" value="Search">
+            </form><hr>
+        닉네임 : {{ target_user.nick_name }} <hr>
+        아이디 : {{ target_user.username }} <hr>
+        생성한지 : {{ target_user.created|timesince }}, 전 <hr>
+        계정상태 : {{ target_user.is_deleted }} <strong>[ False = 사용가능 True = 사용불가]</strong> <hr>
+        탈퇴요청날짜 : {{ target_user.deleted }} <hr>
+    </table>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}

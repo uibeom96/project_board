@@ -10,4 +10,5 @@ urlpatterns = [
     path("detail/<int:pk>/<str:slug>/", views.board_detail, name="board_detail"),
     path("update/<int:pk>/<str:slug>/", views.board_update, name="board_update"),
     path("delete/<int:pk>/<str:slug>/", views.board_delete, name="board_delete"),
+    path("post/likes/", views.board_likes, name="board_likes"),
 ]
