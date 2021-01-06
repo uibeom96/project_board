@@ -63,11 +63,10 @@ def user_delete(request, pk):
         users = get_object_or_404(User, id=pk)
         if request.method == "POST":
             check = request.POST.get("delete_input")
-            print(check)
             if check != "탈퇴하기":
                 return HttpResponse("잘못된 타이핑입니다")
             users.delete()
-            return redirect("board:board_list")
+            return redirect("accounts:user_info", request.user.pk)
         return render(request, "accounts/user_delete.html", {"users": users})
     else:
         return HttpResponseForbidden()

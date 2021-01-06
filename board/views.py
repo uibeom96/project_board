@@ -17,16 +17,42 @@ def board_list(request, pk=None):
     if request.method == "GET":
         search_input = request.GET.get("search_input")
         if search_input is not None:
-            post_list = Post.objects.filter(is_deleted=False, display_avilable=False, title__icontains=search_input).select_related("author")
+            post_list = Post.objects.filter(is_deleted=False, display_avilable=False, title__icontains=search_input).select_related("author").prefetch_related("like", "dis_like")
             page_count = Paginator(post_list, 8)
             page_obj = page_count.get_page(page)
-    
-    if pk != None:
-        user = get_object_or_404(User, id=pk)
-        post_list = Post.objects.filter(is_deleted=False, display_avilable=False, like=user).select_related("author")
-        page_count = Paginator(post_list, 5)
-        page_obj = page_count.get_page(page)
-        
+
+    return render(request, "board/board_list.html", {"post_list": page_obj})
+
+def board_like_list(request, pk):
+    page = request.GET.get("page", 1)
+    user = get_object_or_404(User, id=pk)
+    post_list = Post.objects.filter(is_deleted=False, display_avilable=False, like=user).select_related("author").prefetch_related("like")
+    page_count = Paginator(post_list, 5)
+    page_obj = page_count.get_page(page)
+
+    if request.method == "GET":
+        search_input = request.GET.get("search_input")
+        if search_input is not None:
+            post_list = Post.objects.filter(is_deleted=False, display_avilable=False, like=user, title__icontains=search_input).select_related("author").prefetch_related("like")
+            page_count = Paginator(post_list, 8)
+            page_obj = page_count.get_page(page)
+
+    return render(request, "board/board_list.html", {"post_list": page_obj})
+
+
+def board_dislike_list(request, pk):
+    page = request.GET.get("page", 1)
+    user = get_object_or_404(User, id=pk)
+    post_list = Post.objects.filter(is_deleted=False, display_avilable=False, dis_like=user).select_related("author").prefetch_related("dis_like")
+    page_count = Paginator(post_list, 5)
+    page_obj = page_count.get_page(page)
+
+    if request.method == "GET":
+        search_input = request.GET.get("search_input")
+        if search_input is not None:
+            post_list = Post.objects.filter(is_deleted=False, display_avilable=False, dis_like=user, title__icontains=search_input).select_related("author").prefetch_related("dis_like")
+            page_count = Paginator(post_list, 8)
+            page_obj = page_count.get_page(page)
 
     return render(request, "board/board_list.html", {"post_list": page_obj})
 

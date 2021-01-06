@@ -10,9 +10,9 @@
         </form>
         {% if user.is_authenticated %}
           <h1 style="padding-left: 15px;"></h1>
-          <a class="btn btn-success btn-sm" href="{% url 'board:board_list' user.pk %}">내가 좋아요 누른글</a>
+          <a class="btn btn-success btn-sm"href="{% url 'board:board_like_list' user.pk %}">내가 좋아하는 글</a>
           <h1 style="padding-left: 10px;"></h1>
-          <a class="btn btn-danger btn-sm" href="">내가 싫어요 누른글</a>
+          <a class="btn btn-danger btn-sm"href="{% url 'board:board_dislike_list' user.pk %}">내가 싫어하는 글</a>
         {% endif %}
     </div>
     
@@ -39,5 +39,6 @@
           </li>
       </ul>
     {% endif %}
-      
   </nav>
+
+
