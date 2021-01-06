@@ -4,11 +4,12 @@ from django.core.paginator import Paginator
 from datetime import timezone
 from board.forms import PostCreate_Form
 from django.http import HttpResponseForbidden, HttpResponse
+import json
 
 
 def board_list(request):
     page = request.GET.get("page", 1)
-    post_list = Post.objects.filter(is_deleted=False, display_avilable=False).select_related("author")
+    post_list = Post.objects.filter(is_deleted=False, display_avilable=False).select_related("author").prefetch_related("like", "dis_like")
     page_count = Paginator(post_list , 8)
     page_obj = page_count.get_page(page)
 
@@ -76,8 +77,35 @@ def board_likes(request):
     if request.is_ajax():
         post_id = request.GET.get("post_id")
         post = Post.objects.get(id=post_id)
-
         if not request.user.is_authenticated:
             message = "로그인을 해주세욥"
             context = {"like_count": post.like.count(), "message": message}
-            return http
+            return HttpResponse(json.dumps(context), content_type="application/json")
+
+        if request.user in post.like.all():
+            post.like.remove(request.user)
+            message = "좋아요를 취소합니다."
+        else: 
+            post.like.add(request.user)
+            message = "좋아요를 눌렀습니다."
+        context = {'like_count' : post.like.count(),"message":message}
+        return HttpResponse(json.dumps(context), content_type="application/json")
+
+
+def board_dis_likes(request):
+    if request.is_ajax():
+        post_id = request.GET.get("post_id")
+        post = Post.objects.get(id=post_id)
+        if not request.user.is_authenticated:
+            message = "로그인을 해주세욥"
+            context = {"dis_like_count": post.dis_like.count(), "message": message}
+            return HttpResponse(json.dumps(context), content_type="application/json")
+
+        if request.user in post.dis_like.all():
+            post.dis_like.remove(request.user)
+            message = "싫어요를 취소합니다."
+        else: 
+            post.dis_like.add(request.user)
+            message = "싫어요를 눌렀습니다."
+        context = {'dis_like_count' : post.dis_like.count(),"message":message}
+        return HttpResponse(json.dumps(context), content_type="application/json")               

@@ -21,17 +21,19 @@
                 <p class="text-center"><img src="{{ post.image.url }}" width="70%"></p>
                 {% endif %}
                 <p class="text-center">{{ post.content }}</p>
-
+                
                 <p class="text-center">
-                    <button id="{{ post_id }}" onclick="click_post_like(this.id)" type="submit" class="btn btn-primary">좋아요 
-                        <span id="like_count" class="badge bg-secondary">{{post.like|length}}</span>
+                    <button id="{{ post.id }}" onclick="click_post_like(this.id)" type="submit" class="btn btn-primary">좋아요 
+                        <span id="like_count" class="badge bg-secondary">{{post.like.all|length}}</span>
                     </button>
                         
-                    <button type="submit" class="btn btn-danger">싫어요 
-                        <span class="badge bg-secondary">{{post.like|length}}</span>
+                    <button id="{{ post.id }}" onclick="click_post_dis_like(this.id)" type="submit" class="btn btn-danger">싫어요 
+                        <span id="dis_like_count" class="badge bg-secondary">{{post.dis_like.all|length}}</span>
                     </button>
                 </p>
-
+                <div>
+                    <div class="text-center" id="message"></div>
+                </div>   
                 {% if post.author == request.user %}
                     <a class="btn btn-info" href="{% url 'board:board_update' post.pk post.slug %}">수정</a>
                     <a class="btn btn-warning" href="{% url 'board:board_delete' post.pk post.slug %}">삭제</a>
@@ -42,22 +44,40 @@
     </div>
     <div class="col-md-3"></div>
 </div>
+
+
+
+
 {% endblock %}
 
 {% block js %}
 <script>
-    function click_post_like(id) {
-        console.log("hi")
+    function click_post_like(post_id) {
         $.ajax({
             url: "{% url 'board:board_likes' %}",
             data: {
-                'post_id': id
+                'post_id': post_id
             },
             dataType: "json",
             success: function (response) {
                 $('#like_count').html(response.like_count)
                 $('#message').html(response.message)
-                $('.toast').fadeIn(400).delay(100).fadeOut(400)
+            }
+        })
+    }
+</script>
+
+<script>
+    function click_post_dis_like(post_id) {
+        $.ajax({
+            url: "{% url 'board:board_dis_likes' %}",
+            data: {
+                'post_id': post_id
+            },
+            dataType: "json",
+            success: function (response) {
+                $('#dis_like_count').html(response.dis_like_count)
+                $('#message').html(response.message)
             }
         })
     }

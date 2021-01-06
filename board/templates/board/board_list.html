@@ -28,8 +28,8 @@
             <td><h6><a href="{% url 'accounts:user_info' post.author.pk %}" class="badge bg-secondary text-white">{{post.author.nick_name}}</a></h6></td>
             <td>{{post.created|date:'Y-m-d H:i:s'}}</td>
             <td>{{post.hit_count}}</td>
-            <td>{{post.like|length}}</td>
-            <td>{{post.dis_like|length}}</td>
+            <td>{{post.like.all|length}}</td>
+            <td>{{post.dis_like.all|length}}</td>
         </tr>
     </tbody>
         {% endfor %}
