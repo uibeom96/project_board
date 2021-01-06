@@ -4,15 +4,16 @@ from django.core.paginator import Paginator
 from datetime import timezone
 from board.forms import PostCreate_Form
 from django.http import HttpResponseForbidden, HttpResponse
+from user.models import User
 import json
 
 
-def board_list(request):
+def board_list(request, pk=None):
     page = request.GET.get("page", 1)
     post_list = Post.objects.filter(is_deleted=False, display_avilable=False).select_related("author").prefetch_related("like", "dis_like")
     page_count = Paginator(post_list , 8)
     page_obj = page_count.get_page(page)
-
+    
     if request.method == "GET":
         search_input = request.GET.get("search_input")
         if search_input is not None:
@@ -20,6 +21,13 @@ def board_list(request):
             page_count = Paginator(post_list, 8)
             page_obj = page_count.get_page(page)
     
+    if pk != None:
+        user = get_object_or_404(User, id=pk)
+        post_list = Post.objects.filter(is_deleted=False, display_avilable=False, like=user).select_related("author")
+        page_count = Paginator(post_list, 5)
+        page_obj = page_count.get_page(page)
+        
+
     return render(request, "board/board_list.html", {"post_list": page_obj})
 
 

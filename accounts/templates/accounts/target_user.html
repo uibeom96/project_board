@@ -19,7 +19,7 @@
         닉네임 : {{ target_user.nick_name }} <hr>
         아이디 : {{ target_user.username }} <hr>
         생성한지 : {{ target_user.created|timesince }}, 전 <hr>
-        계정상태 : {{ target_user.is_deleted }} <strong>[ False = 사용가능 True = 사용불가]</strong> <hr>
+        계정상태 : <strong>{% if users.is_deleted == True %} 사용불가 (탈퇴 진행중) {% else %} 사용가능 {% endif %}</strong> <hr>
         탈퇴요청날짜 : {{ target_user.deleted }} <hr>
     </table>
     </div>

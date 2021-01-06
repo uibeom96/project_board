@@ -13,22 +13,22 @@
     <div class="col-md-6 text-center">
         <table>
             <form class="d-flex" action="{% url 'accounts:target_user' %}" method="GET">
-                <input  name="search_user" placeholder="유저 닉네임 검색" value="{{ request.GET.user_search }}">
+                <input  name="search_user" placeholder="유저 닉네임 검색" value="{{ request.GET.search_user }}">
                 <input  type="submit" value="Search">
             </form><hr>
-        닉네임 : {{ user.nick_name }} <hr>
-        아이디 : {{ user.username }} <hr>
-        생성한지 : {{ user.created|timesince }}, 전 <hr>
-        계정상태 : <strong>{% if user.is_deleted == True %} 사용불가 (탈퇴 진행중) {% else %} 사용가능 {% endif %}</strong> <hr>
+        닉네임 : {{ users.nick_name }} <hr>
+        아이디 : {{ users.username }} <hr>
+        생성한지 : {{ users.created|timesince }}, 전 <hr>
+        계정상태 : <strong>{% if users.is_deleted == True %} 사용불가 (탈퇴 진행중) {% else %} 사용가능 {% endif %}</strong> <hr>
         탈퇴요청날짜 : {{ user.deleted|date:'Y-m-d / H:i:s' }} <hr>
     </table>
-    {% if request.user == user %}
+    {% if request.user == users %}
 
-    <a class="btn btn-info" href="{% url 'accounts:user_update' user.pk %}">회원정보 수정</a>
-        {% if user.is_deleted == False %}
-            <a class="btn btn-danger" href="{% url 'accounts:user_delete' user.pk %}">계정탈퇴 요청</a>
+    <a class="btn btn-info" href="{% url 'accounts:user_update' users.pk %}">회원정보 수정</a>
+        {% if users.is_deleted == False %}
+            <a class="btn btn-danger" href="{% url 'accounts:user_delete' users.pk %}">계정탈퇴 요청</a>
         {% else %}
-        <a class="btn btn-danger" href="{% url 'accounts:user_active' user.pk %}">계정복구</a>
+        <a class="btn btn-danger" href="{% url 'accounts:user_active' users.pk %}">계정복구</a>
         {% endif %}
 
     {% endif %}
