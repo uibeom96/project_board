@@ -10,6 +10,8 @@
         </form>
         {% if user.is_authenticated %}
           <h1 style="padding-left: 15px;"></h1>
+          <a class="btn btn-secondary btn-sm"href="{% url 'board:board_mypost' user.pk %}">내가 작성한 글</a>
+          <h1 style="padding-left: 10px;"></h1>
           <a class="btn btn-success btn-sm"href="{% url 'board:board_like_list' user.pk %}">내가 좋아하는 글</a>
           <h1 style="padding-left: 10px;"></h1>
           <a class="btn btn-danger btn-sm"href="{% url 'board:board_dislike_list' user.pk %}">내가 싫어하는 글</a>

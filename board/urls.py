@@ -6,6 +6,7 @@ app_name = "board"
 
 urlpatterns = [
     path("", views.board_list, name="board_list"),
+    path("my/post/<int:pk>/", views.board_list, name="board_mypost"),
     path("my/like/post/<int:pk>/", views.board_like_list, name="board_like_list"),
     path("my/dislike/post/<int:pk>/", views.board_dislike_list, name="board_dislike_list"),
     path("create/", views.board_create, name="board_create"),

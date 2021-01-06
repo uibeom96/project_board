@@ -6,7 +6,7 @@
 {% block content %}
 <br>
 <div class="row">
-    <div class="col-md-3"></div>
+    <div class="col-md-1"></div>
     <div class="col-md-6">
 
         <div class="card">
@@ -39,13 +39,21 @@
                     <a class="btn btn-warning" href="{% url 'board:board_delete' post.pk post.slug %}">삭제</a>
                 {% endif %}
             </div>
-            <hr><br><br>
+            <br><br><br>
         </div>
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-4">
+        {% for comment in post.posts.all %}
+        <div class="row mt-1">
+            <div class="card comment py-2 text-muted">
+                <div class="card-body">{{ comment.content }}</div><br>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
-
+ 
 
 
 {% endblock %}

@@ -26,3 +26,18 @@ class Post(Base_model):
     
     def get_absolute_url(self):
         return reverse("board:board_detail", args=[self.pk, self.slug])
+
+
+class Comment(Base_model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="posts")
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.CharField(max_length=50)
+
+    class Meta:
+        ordering = ("-created", )
+        db_table = "comments"
+
+    def __str__(self):
+        return str(self.author)+"의 댓글"
+
+
