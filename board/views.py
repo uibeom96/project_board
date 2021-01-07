@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from board.models import Post
+from board.models import Post, Comment
 from django.core.paginator import Paginator
 from datetime import timezone
-from board.forms import PostCreate_Form
+from board.forms import PostCreate_Form, Comment_Form
 from django.http import HttpResponseForbidden, HttpResponse
 from user.models import User
 import json
@@ -99,7 +99,25 @@ def board_update(request, pk, slug):
 
 def board_detail(request, pk, slug):
     post = get_object_or_404(Post, id=pk, slug=slug)
-    return render(request, "board/board_detail.html", {"post": post})
+
+
+    page = request.GET.get("page", 1)
+    post_list = post.posts.all()
+    page_count = Paginator(post_list, 5)
+    page_obj = page_count.get_page(page)
+
+
+    if request.method =="POST":
+        form = Comment_Form(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.author = request.user
+            data.post = post
+            data.save()
+            return redirect(Post.get_absolute_url(post))
+    else:
+        form = Comment_Form()
+    return render(request, "board/board_detail.html", {"post": post, "form": form, "comment_page": page_obj})
 
 
 def board_delete(request, pk, slug):

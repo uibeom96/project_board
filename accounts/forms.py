@@ -10,7 +10,8 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ("nick_name", "username", "password", "password2")
         labels= {
-            "nick_name": "닉네임"
+            "nick_name": "닉네임",
+            "username": "아이디",
             }
     
     def clean_nick_name(self):
@@ -36,3 +37,4 @@ class UserUpdateForm(forms.ModelForm):
         if User.objects.filter(nick_name=check):
             raise forms.ValidationError("이미 존재하는 닉네임 입니다.")
         return check
+        
