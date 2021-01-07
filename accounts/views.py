@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseForbidden
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from accounts.serializer import Accounts_Serializer
-
+from board.models import Post, Comment
 
 # Create your views here.
 def signup(request):
@@ -41,7 +41,11 @@ def user_manager(request):
 
 def user_info(request, pk):
     users = get_object_or_404(User, id=pk)
-    return render(request, "accounts/user_info.html", {"users": users}) 
+    post = Post.objects.filter(author=users)
+    comment = Comment.objects.filter(author=users)
+
+
+    return render(request, "accounts/user_info.html", {"users": users, "post": post, "comment": comment}) 
 
 
 def user_update(request, pk):

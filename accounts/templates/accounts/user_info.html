@@ -12,11 +12,10 @@
     <div class="col-md-3">
         <div class="card">
             <div class="card-body">
-                <h7>작성한 글 : 0개</h7> <hr>
-                <h7>작성한 댓글 : 0개</h7> <hr>
-                <h7>좋아요 갯수 : 0개</h7> <hr>
-                <h7>싫어요 갯수 : 0개</h7> <hr>
-
+                <h7>작성한 글 : {{ post|length }}개</h7> <hr>
+                <h7>작성한 댓글 : {{ comment|length }}개</h7> <hr>
+                <h7>좋아요 받고 누른횟수 : {{ user.likes.all|length }}</h7> <hr>
+                <h7>싫어요 받고 누른횟수 : {{ user.dis_likes.all|length }}</h7> <hr>
             </div>
         </div>
     </div>
