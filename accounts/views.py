@@ -44,7 +44,6 @@ def user_info(request, pk):
     post = Post.objects.filter(author=users)
     comment = Comment.objects.filter(author=users)
 
-
     return render(request, "accounts/user_info.html", {"users": users, "post": post, "comment": comment}) 
 
 

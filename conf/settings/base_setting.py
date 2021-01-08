@@ -85,7 +85,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-HIT_ID = 1
+HIT_ID = "hit_check"
 
 
 STATIC_URL = '/static/'

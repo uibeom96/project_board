@@ -5,6 +5,7 @@ from datetime import timezone
 from board.forms import PostCreate_Form, Comment_Form
 from django.http import HttpResponseForbidden, HttpResponse
 from user.models import User
+from board.session import Hit_session
 import json
 
 
@@ -96,16 +97,15 @@ def board_update(request, pk, slug):
     else:
         return HttpResponseForbidden()
 
-
 def board_detail(request, pk, slug):
     post = get_object_or_404(Post, id=pk, slug=slug)
-
-
     page = request.GET.get("page", 1)
     post_list = post.posts.all()
     page_count = Paginator(post_list, 5)
     page_obj = page_count.get_page(page)
 
+    a = Hit_session(request)
+    a.hit_add(post)
 
     if request.method =="POST":
         form = Comment_Form(request.POST)
@@ -117,6 +117,7 @@ def board_detail(request, pk, slug):
             return redirect(Post.get_absolute_url(post))
     else:
         form = Comment_Form()
+
     return render(request, "board/board_detail.html", {"post": post, "form": form, "comment_page": page_obj})
 
 
