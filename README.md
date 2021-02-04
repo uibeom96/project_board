@@ -5,7 +5,7 @@
 백엔드를 기초적으로 얕게라도 공부해보았습니다. 그래서. 아직 프론트엔트를 제대로 공부하지 못하여서
 HTML / CSS / JS 는 백엔드개발에 맞게 최대한 간단하게 구현 했습니다.
 
-<img src="ss" width="700" height="370">
+<img src="C:\Users\vosxo\OneDrive\바탕 화면\깃허브\게시판 README\게시판 메인.png" width="700" height="370">
 
 구현된 기능 
 - 게시판 CRUD 
