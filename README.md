@@ -23,7 +23,5 @@ DB는 postgresql을 사용하였습니다.
 클론시 데이터베이스 portgresql 필요합니다.  
 
 
---------------------------------------------------------
-해당 프로젝트에 쓰인 라이브러리 requirements.txt 설치방법
-pip install -r requirements.txt
---------------------------------------------------------
+해당 프로젝트에 쓰인 라이브러리 requirements.txt 설치방법  
+pip install -r requirements.txt  
