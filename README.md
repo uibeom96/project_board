@@ -18,7 +18,7 @@ HTML / CSS / JS 는 백엔드 개발 포커스에 맞게 최대한 간단하게 
 <img src="https://user-images.githubusercontent.com/76981768/106838555-e1fb1200-66df-11eb-907e-6d6b83726d25.png" width="500" height="300">
 <img src="https://user-images.githubusercontent.com/76981768/106838562-e3c4d580-66df-11eb-9c6b-8ce9dd2f71ba.png" width="500" height="300">
 
-해당 프로젝트는 python / Django 로 개발하였습니다.
-DB는 postgresql을 사용하였습니다.
-( 클론시 데이터베이스 portgresql 필요합니다 )
+해당 프로젝트는 python / Django 로 개발하였습니다.  
+DB는 postgresql을 사용하였습니다.  
+클론시 데이터베이스 portgresql 필요합니다.  
 
